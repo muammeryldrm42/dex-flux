@@ -3,8 +3,8 @@ import axios from "axios";
 import { supabaseServer } from "@/lib/supabase/server";
 import { isValidSolanaAddress } from "@/lib/solana/validate";
 
-export async function GET(_req: Request, { params }: { params: { mint: string } }) {
-  const mint = params.mint;
+export async function GET(_req: Request, { params }: { params: Promise<{ mint: string }> }) {
+  const { mint } = await params;
 
   if (!isValidSolanaAddress(mint)) {
     return NextResponse.json({ error: "Invalid mint address" }, { status: 400 });
