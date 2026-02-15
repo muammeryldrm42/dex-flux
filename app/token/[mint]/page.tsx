@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import { Card } from "@/components/ui/card";
 import { Globe, Send, MessageCircle, Twitter } from "lucide-react";
 
-export default function TokenDetailPage({ params }: { params: { mint: string } }) {
-  const mint = params.mint;
+export default function TokenDetailPage() {
+  const params = useParams<{ mint: string }>();
+  const mint = params?.mint ?? "";
   const [data, setData] = useState<any>(null);
   const [err, setErr] = useState<string | null>(null);
 
